@@ -1,0 +1,27 @@
+name: Telegram Cron Job
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"  # Ejecutar cada minuto
+  workflow_dispatch:  # Permite ejecución manual
+
+jobs:
+  send_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Instalar dependencias
+        run: pip install requests
+
+      - name: Enviar mensaje por Telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python send_telegram.py
