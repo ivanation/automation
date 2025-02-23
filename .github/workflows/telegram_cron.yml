@@ -2,7 +2,7 @@ name: Telegram Cron Job
 
 on:
   schedule:
-    - cron: "*/3 * * * *"  # Ejecutar cada minuto
+    - cron: "*/1 * * * *"  # Ejecutar cada minuto
   workflow_dispatch:  # Permite ejecución manual
 
 jobs:
